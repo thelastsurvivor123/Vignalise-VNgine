@@ -7,11 +7,11 @@
     <title>HTML guide — Vignalise VNgine</title>
     <link rel="stylesheet" href="style.css">
     <script src="theme.js" defer></script>
+    <script src="guide-folders.js" defer></script>
   </head>
   <body class="guide-page">
     <header class="topbar">
       <a class="brand" href="index.html" aria-label="Vignalise VNgine home"><span class="brand-name">Vignalise <span class="brand-engine">VNgine</span></span></a>
-      <div class="project-name"><span class="project-dot"></span><span>HTML guide</span><span class="project-kind">DOCUMENTATION</span></div>
       <nav class="top-actions" aria-label="Guide navigation">
         <button class="button button-quiet theme-toggle" id="theme-toggle" type="button" aria-label="Switch to light mode" aria-pressed="false">☀ Light</button>
         <a class="button button-quiet" href="editor.html">← Back to editor</a>
@@ -20,10 +20,8 @@
 
     <main class="guide-main">
       <header class="guide-hero">
-        <span class="guide-eyebrow">VIGNALISE VNGINE · STORY AUTHORING</span>
-        <h1>Write your story in HTML.</h1>
-        <p>Vignalise VNgine reads a small, regular-HTML structure and turns it into a branching visual novel. Write the source in the editor, follow the story in the live preview, and export or import the source whenever you like.</p>
-        <div class="guide-actions">
+        <span class="guide-eyebrow">VIGNALISE VNGINE · USAGE GUIDE</span>
+        <h1>Guides and Tutorials to your story in HTML.</h1>
           <a class="button button-primary guide-link" href="editor.html">Open the editor →</a>
           <a class="button button-quiet guide-link" href="#quick-start">Read the first example</a>
         </div>
@@ -68,46 +66,29 @@
       </details>
 
       <div class="guide-grid">
-        <section class="guide-card" aria-labelledby="project-explorer">
-          <h2 id="project-explorer">Project explorer and image assets</h2>
-          <p>The Explorer shows your browser-saved project together with repository files from the engine’s <code>stories/</code> and <code>assets/</code> folders. Repository entries are marked <strong>SOURCE</strong> and are read-only in the browser; change them in the engine’s VS Code folders and publish the site to update what everyone sees. Your own files remain separate in your browser.</p>
-          <p>You can delete the starter <code>stories/example.html</code> from your browser project; this only hides that example for you and does not change the shared engine files. Images provided by the engine are protected from deletion. Images you upload yourself remain part of your browser project and can be managed there.</p>
-          <p>To add shared content, place HTML stories in the repository’s <code>stories/</code> folder and images in <code>assets/</code>. VS Code starts a watcher when this workspace opens; saving a story or image rebuilds the shared library, and an editor opened as <code>file://</code> refreshes those files automatically. If automatic tasks are disabled, run <code>powershell -NoProfile -ExecutionPolicy Bypass -File .\build-library-index.ps1</code> manually. When publishing the hosted site, include the updated <code>library-index.json</code>, <code>library-data.js</code>, and <code>library-revision.js</code> together with the stories and assets.</p>
-          <p>For a repository image shown in the Explorer, use its path in <code>data-background</code>:</p>
-          <pre class="guide-code"><code>&lt;section id="garden" data-scene
-  data-background="assets/garden.jpg"&gt;
-  ...
-&lt;/section&gt;</code></pre>
-          <p>Select an image uploaded to your browser project to reveal its unique asset ID. Use the ID in a scene’s <code>data-background</code> with the <code>asset:</code> prefix:</p>
-          <pre class="guide-code"><code>&lt;section id="garden" data-scene
-  data-background="asset:img-a1b2c3d4"&gt;
-  &lt;p data-character="Mira" data-dialogue&gt;
-    The garden is quiet.
-  &lt;/p&gt;
-&lt;/section&gt;</code></pre>
-          <p class="guide-note">Replace <code>img-a1b2c3d4</code> with the ID shown for your uploaded image. Project files and uploaded assets are stored in this browser on this device.</p>
-        </section>
-
-        <section class="guide-card" aria-labelledby="story-wrapper">
-          <h2 id="story-wrapper">Story wrapper</h2>
+        <div class="guide-row">
+        <button class="guide-folder-toggle" type="button" aria-expanded="false" aria-controls="story-wrapper-panel"><span class="guide-folder-title" id="story-wrapper">Story wrapper</span><span class="guide-example-icon" aria-hidden="true">+</span></button>
+          <div class="guide-card-content guide-row-content" id="story-wrapper-panel" role="region" aria-labelledby="story-wrapper" hidden>
           <p>Put the story inside one element marked <code>data-vn-story</code>. A <code>data-title</code> gives your project its name.</p>
           <pre class="guide-code"><code>&lt;main data-vn-story data-title="My story"&gt;
   ...
 &lt;/main&gt;</code></pre>
           <p>The story must contain at least one scene.</p>
-        </section>
+          </div>
 
-        <section class="guide-card" aria-labelledby="scenes">
-          <h2 id="scenes">Scenes</h2>
+        <button class="guide-folder-toggle" type="button" aria-expanded="false" aria-controls="scenes-panel"><span class="guide-folder-title" id="scenes">Scenes</span><span class="guide-example-icon" aria-hidden="true">+</span></button>
+          <div class="guide-card-content guide-row-content" id="scenes-panel" role="region" aria-labelledby="scenes" hidden>
           <p>Make each scene a direct child of the story wrapper. Give every scene a unique ID so choices can link to it.</p>
           <pre class="guide-code"><code>&lt;section id="station" data-scene&gt;
   ...
 &lt;/section&gt;</code></pre>
           <p>Scene IDs should be simple and unique, such as <code>station</code>, <code>chapter-2</code>, or <code>endingA</code>.</p>
-        </section>
+          </div>
+        </div>
 
-        <section class="guide-card" aria-labelledby="dialogue">
-          <h2 id="dialogue">Dialogue and narration</h2>
+        <div class="guide-row">
+        <button class="guide-folder-toggle" type="button" aria-expanded="false" aria-controls="dialogue-panel"><span class="guide-folder-title" id="dialogue">Dialogue and narration</span><span class="guide-example-icon" aria-hidden="true">+</span></button>
+          <div class="guide-card-content guide-row-content" id="dialogue-panel" role="region" aria-labelledby="dialogue" hidden>
           <p>Each direct-child paragraph marked <code>data-dialogue</code> is one step. The reader clicks Continue to move to the next line.</p>
           <pre class="guide-code"><code>&lt;p data-character="Mira" data-dialogue&gt;
   I thought you had left.
@@ -115,11 +96,11 @@
 &lt;p data-dialogue&gt;
   The station clock ticks above you.
 &lt;/p&gt;</code></pre>
-          <p><code>data-character</code> is optional; leave it off for narration. Basic inline formatting such as <code>&lt;em&gt;</code>, <code>&lt;strong&gt;</code>, <code>&lt;br&gt;</code>, and <code>&lt;span&gt;</code> is supported inside dialogue.</p>
-        </section>
+<p><code>data-character</code> is optional; leave it off for narration. Basic inline formatting such as <code>&lt;em&gt;</code>, <code>&lt;strong&gt;</code>, <code>&lt;br&gt;</code>, and <code>&lt;span&gt;</code> is supported inside dialogue.</p>
+</div>
 
-        <section class="guide-card" aria-labelledby="choices">
-          <h2 id="choices">Branching choices</h2>
+        <button class="guide-folder-toggle" type="button" aria-expanded="false" aria-controls="choices-panel"><span class="guide-folder-title" id="choices">Branching choices</span><span class="guide-example-icon" aria-hidden="true">+</span></button>
+<div class="guide-card-content guide-row-content" id="choices-panel" role="region" aria-labelledby="choices" hidden>
           <p>Put choice links directly inside their scene. Choices appear after that scene’s dialogue has been read.</p>
           <pre class="guide-code"><code>&lt;a data-choice href="#market"&gt;
   Follow the music
@@ -139,26 +120,30 @@
   &lt;p data-dialogue&gt;You find each other again.&lt;/p&gt;
 &lt;/section&gt;</code></pre>
           <p>Keep linked stories inside the project and make sure the target file and scene ID exist. The editor preview follows links to stories available in the Explorer. For standalone playback of cross-file branches, export the project and drop or choose the complete ZIP on the home page; selecting just one HTML file cannot load its linked files.</p>
-        </section>
+          </div>
+        </div>
 
-        <section class="guide-card" aria-labelledby="backgrounds">
-          <h2 id="backgrounds">Scene backgrounds</h2>
+        <div class="guide-row">
+        <button class="guide-folder-toggle" type="button" aria-expanded="false" aria-controls="backgrounds-panel"><span class="guide-folder-title" id="backgrounds">Scene backgrounds</span><span class="guide-example-icon" aria-hidden="true">+</span></button>
+          <div class="guide-card-content guide-row-content" id="backgrounds-panel" role="region" aria-labelledby="backgrounds" hidden>
           <p>Add <code>data-background</code> to a scene to show an image behind its dialogue. Use an image URL the browser can access.</p>
           <pre class="guide-code"><code>&lt;section id="garden" data-scene
   data-background="https://example.com/garden.jpg"&gt;
   ...
 &lt;/section&gt;</code></pre>
-          <p>Use <code>https://</code> or <code>http://</code> for a web image, or use an uploaded project image ID as described above. Project image data is saved in the virtual project and stays on this device.</p>
-        </section>
+<p>Use <code>https://</code> or <code>http://</code> for a web image, or use an uploaded project image ID as described above. Project image data is saved in the virtual project and stays on this device.</p>
+</div>
 
-        <section class="guide-card" aria-labelledby="finish">
-          <h2 id="finish">Endings</h2>
-          <p>A scene without choices ends its path after its dialogue. The reader can restart the story using the Restart button beneath the preview.</p>
-        </section>
+        <button class="guide-folder-toggle" type="button" aria-expanded="false" aria-controls="finish-panel"><span class="guide-folder-title" id="finish">Endings</span><span class="guide-example-icon" aria-hidden="true">+</span></button>
+<div class="guide-card-content guide-row-content" id="finish-panel" role="region" aria-labelledby="finish" hidden>
+<p>A scene without choices ends its path after its dialogue. The reader can restart the story using the Restart button beneath the preview.</p>
+</div>
+        </div>
       </div>
 
-      <section class="guide-card" aria-labelledby="import-export">
-        <h2 id="import-export">Save, export, and continue later</h2>
+      <details class="guide-card">
+        <summary class="guide-card-summary"><h2 id="import-export">Save, export, and continue later</h2><span class="guide-example-icon" aria-hidden="true">+</span></summary>
+        <div class="guide-card-content">
         <ul>
           <li>Your current source autosaves in this browser on this device.</li>
           <li><strong>Export project</strong> downloads a ZIP containing your project folders, HTML stories, uploaded images, and the repository stories/assets currently shown in Explorer. Choose the top-level project folder name when exporting.</li>
@@ -167,10 +152,12 @@
           <li>Import replaces the project saved in this browser profile. Export a backup first if you want to keep that project.</li>
         </ul>
         <p class="guide-note">The project ZIP can be played in Vignalise VNgine and is also an editable backup. Keep it to move your project to another browser or device.</p>
-      </section>
+        </div>
+      </details>
 
-      <section class="guide-card" aria-labelledby="workflow">
-        <h2 id="workflow">A simple workflow</h2>
+      <details class="guide-card">
+        <summary class="guide-card-summary"><h2 id="workflow">A simple workflow</h2><span class="guide-example-icon" aria-hidden="true">+</span></summary>
+        <div class="guide-card-content">
         <ol>
           <li>Write or paste your HTML in the source editor.</li>
           <li>Check the live preview and follow the choices.</li>
@@ -180,7 +167,8 @@
         <div class="guide-actions">
           <a class="button button-primary guide-link" href="editor.html">Back to the editor →</a>
         </div>
-      </section>
+        </div>
+      </details>
     </main>
   </body>
 </html>

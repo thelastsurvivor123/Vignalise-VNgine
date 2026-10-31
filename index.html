@@ -7,6 +7,7 @@
     <title>Vignalise VNgine — HTML visual novel engine</title>
     <link rel="stylesheet" href="style.css">
     <script src="theme.js" defer></script>
+    <script src="home-menu.js" defer></script>
     <script src="play-story.js" defer></script>
   </head>
   <body class="guide-page home-page">
@@ -14,15 +15,21 @@
       <a class="brand" href="index.html" aria-label="Vignalise VNgine home"><span class="brand-name">Vignalise <span class="brand-engine">VNgine</span></span></a>
       <nav class="top-actions" aria-label="Main navigation">
         <button class="button button-quiet theme-toggle" id="theme-toggle" type="button" aria-label="Switch to light mode" aria-pressed="false">☀ Light</button>
-        <a class="button button-quiet" href="guide.html">HTML guide</a>
+        <button class="top-menu-toggle" id="home-menu-toggle" type="button" aria-label="Open menu" aria-expanded="false" aria-controls="home-menu-items">
+          <span></span><span></span><span></span>
+        </button>
+        <div class="top-menu-items" id="home-menu-items">
+          <a class="button button-quiet menu-guide-link" href="guide.html">HTML guide</a>
+        </div>
+        <a class="button button-quiet home-mobile-guide" href="guide.html">HTML guide</a>
       </nav>
     </header>
 
     <main class="guide-main home-main">
       <section class="guide-hero home-hero">
         <span class="guide-eyebrow">This is a simple passion project, please don't expect too much.</span>
-        <h1>Tell your story in HTML.</h1>
-        <p>Write scenes, dialogue, and branching choices with familiar markup.</p>
+        <h1>Create your Visual Novel in HTML.</h1>
+        <p>This Web-Engine is still in development.</p>
         <div class="guide-actions">
           <a class="button button-primary guide-link home-cta" href="editor.html">Open the coding area →</a>
         </div>
