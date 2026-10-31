@@ -1,0 +1,39 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="theme-color" content="#11131b">
+    <title>Vignalise VNgine — HTML visual novel engine</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="theme.js" defer></script>
+    <script src="play-story.js" defer></script>
+  </head>
+  <body class="guide-page home-page">
+    <header class="topbar">
+      <a class="brand" href="index.html" aria-label="Vignalise VNgine home"><span class="brand-name">Vignalise <span class="brand-engine">VNgine</span></span></a>
+      <nav class="top-actions" aria-label="Main navigation">
+        <button class="button button-quiet theme-toggle" id="theme-toggle" type="button" aria-label="Switch to light mode" aria-pressed="false">☀ Light</button>
+        <a class="button button-quiet" href="guide.html">HTML guide</a>
+      </nav>
+    </header>
+
+    <main class="guide-main home-main">
+      <section class="guide-hero home-hero">
+        <span class="guide-eyebrow">This is a simple passion project, please don't expect too much.</span>
+        <h1>Tell your story in HTML.</h1>
+        <p>Write scenes, dialogue, and branching choices with familiar markup.</p>
+        <div class="guide-actions">
+          <a class="button button-primary guide-link home-cta" href="editor.html">Open the coding area →</a>
+        </div>
+        <section class="story-drop-area" id="story-drop-area" aria-labelledby="story-drop-title">
+          <h2 id="story-drop-title">Play a story</h2>
+          <p>Drop an HTML story file or a project ZIP here, or choose one to play it in a full-screen reader.</p>
+          <button class="button button-quiet" id="choose-story-button" type="button">Choose a story or project ZIP</button>
+          <input id="story-file-input" class="sr-only" type="file" accept=".html,.htm,.zip,text/html,application/zip,application/x-zip-compressed">
+          <p class="story-drop-status" id="story-drop-status" role="status" aria-live="polite"></p>
+        </section>
+      </section>
+    </main>
+  </body>
+</html>

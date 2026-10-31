@@ -1,0 +1,118 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="theme-color" content="#11131b">
+    <title>Story editor — Vignalise VNgine</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="theme.js" defer></script>
+    <script src="library-revision.js" defer></script>
+    <script src="library-data.js" defer></script>
+    <script src="engine.js" defer></script>
+  </head>
+  <body>
+    <header class="topbar">
+      <a class="brand" href="index.html" aria-label="Vignalise VNgine home"><span class="brand-name">Vignalise <span class="brand-engine">VNgine</span></span></a>
+      <div class="project-name"><span id="project-label">The Last Train</span><span class="active-file-indicator">ACTIVE FILE</span></div>
+      <div class="top-actions">
+        <button class="top-menu-toggle" id="top-menu-toggle" type="button" aria-label="Open menu" aria-expanded="false" aria-controls="top-menu-items">
+          <span></span><span></span><span></span>
+        </button>
+        <div class="top-menu-items" id="top-menu-items">
+          <button class="button button-quiet theme-toggle" id="theme-toggle" type="button" aria-label="Switch to light mode" aria-pressed="false">☀ Light</button>
+          <button class="button button-quiet" id="open-button" type="button" title="Import a complete project archive">Import project</button>
+          <button class="button button-quiet" id="export-source-button" type="button" title="Export the complete project archive">Export project</button>
+          <a class="button button-quiet menu-guide-link" href="guide.html">HTML guide</a>
+        </div>
+        <input id="open-file" class="sr-only" type="file" accept=".zip,application/zip,application/x-zip-compressed">
+      </div>
+    </header>
+
+    <main class="workspace">
+      <aside class="explorer-panel" aria-label="Project explorer">
+        <header class="explorer-header">
+          <div class="explorer-heading"><span class="explorer-heading-icon" aria-hidden="true">▤</span><h1>Explorer</h1></div>
+          <button class="explorer-collapse-toggle" id="explorer-collapse-toggle" type="button" aria-expanded="true" aria-controls="explorer-content" aria-label="Collapse project explorer">−</button>
+        </header>
+        <div class="explorer-content" id="explorer-content">
+          <div class="explorer-actions" aria-label="Project file actions">
+            <button class="explorer-action" id="new-file-button" type="button" title="New HTML file" aria-label="New HTML file">＋</button>
+            <button class="explorer-action" id="new-folder-button" type="button" title="New folder" aria-label="New folder">▰</button>
+            <button class="explorer-action" id="upload-asset-button" type="button" title="Upload image asset" aria-label="Upload image asset">↑</button>
+            <button class="explorer-action" id="rename-entry-button" type="button" title="Rename selected item" aria-label="Rename selected item">✎</button>
+            <button class="explorer-action" id="delete-entry-button" type="button" title="Delete selected item" aria-label="Delete selected item">
+              <svg class="delete-icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+                <path d="M4.5 7h15m-13.5 0 .8 13h10.4L18 7M9 7V4.5h6V7m-5 3.5v6m4-6v6"/>
+              </svg>
+            </button>
+          </div>
+          <input id="asset-file-input" class="sr-only" type="file" accept="image/*" multiple>
+          <div class="project-root"><span aria-hidden="true">⌄</span><span id="explorer-project-name">MY PROJECT</span></div>
+          <div class="explorer-entry-form" id="explorer-entry-form" hidden>
+            <label class="sr-only" for="entry-name">New file or folder name</label>
+            <input id="entry-name" type="text" autocomplete="off" maxlength="100">
+            <button id="entry-save-button" type="button">Add</button>
+            <button id="entry-cancel-button" type="button" aria-label="Cancel">×</button>
+          </div>
+          <nav class="file-tree" id="file-tree" aria-label="Project files"></nav>
+          <section class="asset-details" id="asset-details" aria-label="Selected asset" hidden>
+            <span class="asset-details-title">IMAGE ASSET ID</span>
+            <code id="selected-asset-id"></code>
+            <button class="asset-copy-button" id="copy-asset-id" type="button">Copy ID</button>
+            <span class="asset-usage">Use it in HTML: <code>data-background="asset:ID"</code></span>
+            <img class="asset-preview" id="asset-preview" alt="" hidden>
+            <span class="asset-preview-error" id="asset-preview-error" role="status" hidden>Preview unavailable.</span>
+          </section>
+          <footer class="explorer-footer"><span class="status-dot" aria-hidden="true"></span><span>Project saved on this device</span></footer>
+        </div>
+      </aside>
+
+      <section class="editor-panel" aria-label="HTML story editor">
+        <header class="panel-header">
+          <div class="panel-title"><span class="panel-icon code-icon">&lt;/&gt;</span><div><h1>Story source</h1><p id="editor-mode-label">Changes are saved automatically in this browser.</p></div></div>
+          <span class="file-label"><span id="active-file-label">No story selected</span></span>
+        </header>
+        <aside class="storage-warning" id="storage-warning" role="status">
+          <span>If you clear cookies or site data, your project and uploaded assets will be deleted. Export your source and back up your assets first.</span>
+          <button type="button" aria-label="Dismiss storage reminder">×</button>
+        </aside>
+        <div class="editor-wrap">
+          <div class="line-numbers" id="line-numbers" aria-hidden="true">1</div>
+          <label class="sr-only" for="source-editor">HTML story source</label>
+          <textarea id="source-editor" spellcheck="false" autocapitalize="off" autocomplete="off" autocorrect="off" aria-describedby="editor-help"></textarea>
+        </div>
+        <div class="editor-footer">
+          <span id="editor-help">HTML <span class="footer-divider">·</span> <span id="line-count">1</span> lines</span>
+          <span class="shortcut-hint">Preview updates as you type</span>
+        </div>
+        <div class="diagnostics" id="diagnostics" role="status" aria-live="polite"></div>
+      </section>
+
+      <section class="reader-panel" aria-label="Live story preview">
+        <header class="panel-header reader-header">
+          <div class="panel-title"><div><h2>Reader preview</h2><p>Live preview of your story.</p></div></div>
+          <div class="reader-header-actions">
+            <span class="preview-badge"><span></span> LIVE</span>
+            <button class="reader-collapse-toggle" id="reader-collapse-toggle" type="button" aria-expanded="true" aria-controls="reader-area" aria-label="Collapse reader preview">−</button>
+          </div>
+        </header>
+        <div class="reader-area" id="reader-area">
+          <div class="novel-stage" id="novel-stage">
+            <img class="stage-background" id="stage-background" alt="">
+            <div class="stage-wash"></div>
+            <div class="novel-content" id="novel-content" aria-live="polite"></div>
+          </div>
+          <div class="reader-controls">
+            <span class="scene-progress" id="scene-progress">SCENE 01</span>
+            <button class="button button-quiet reader-restart" id="restart-button" type="button">Restart ↺</button>
+          </div>
+          <section class="active-resources" aria-labelledby="active-resources-title">
+            <h3 id="active-resources-title">Files and assets used in this scene</h3>
+            <ul id="active-resource-list" aria-live="polite"></ul>
+          </section>
+        </div>
+      </section>
+    </main>
+  </body>
+</html>
