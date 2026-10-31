@@ -29,7 +29,9 @@ button:focus-visible, textarea:focus-visible, a:focus-visible { outline: 2px sol
 .top-menu-toggle:hover { border-color: #555665; background: #1d1f29; }
 .top-menu-items { position: relative; order: 1; display: flex; align-items: center; gap: 8px; }
 .top-menu-items .menu-guide-link { position: absolute; z-index: 5; top: calc(100% + 17px); right: 0; display: none; min-height: 40px; border: 1px solid #333542; padding: 0 12px; background: #181a24; box-shadow: 0 8px 24px #0005; font-size: 13px; white-space: nowrap; }
+.top-menu-items .menu-roadmap-link { position: absolute; z-index: 5; top: calc(100% + 65px); right: 0; display: none; min-height: 40px; border: 1px solid #333542; padding: 0 12px; background: #181a24; box-shadow: 0 8px 24px #0005; font-size: 13px; white-space: nowrap; }
 .top-menu-items.open .menu-guide-link { display: inline-flex; }
+.top-menu-items.open .menu-roadmap-link { display: inline-flex; }
 .top-actions .home-mobile-guide { display: none; }
 .button { display: inline-flex; min-height: 33px; align-items: center; justify-content: center; gap: 7px; border: 1px solid transparent; border-radius: 6px; padding: 0 11px; font-size: 10px; font-weight: 640; text-decoration: none; cursor: pointer; transition: background .15s, border-color .15s, transform .15s; }
 .button:active { transform: translateY(1px); }
@@ -154,6 +156,7 @@ button:focus-visible, textarea:focus-visible, a:focus-visible { outline: 2px sol
 :root[data-theme="light"] .top-menu-toggle { border-color: #d5d3cb; background: #eeede8; color: #454650; }
 :root[data-theme="light"] .top-menu-toggle:hover { border-color: #bbb9b0; background: #e6e5df; }
 :root[data-theme="light"] .menu-guide-link { border-color: #d5d3cb; background: #f4f3ef; box-shadow: 0 8px 24px #292a311a; }
+:root[data-theme="light"] .menu-roadmap-link { border-color: #d5d3cb; background: #f4f3ef; box-shadow: 0 8px 24px #292a311a; }
 :root[data-theme="light"] .explorer-panel { border-color: #d9d7d0; background: #eeede8; }
 :root[data-theme="light"] .explorer-heading-icon,
 :root[data-theme="light"] .tree-chevron,
@@ -223,6 +226,10 @@ button:focus-visible, textarea:focus-visible, a:focus-visible { outline: 2px sol
 :root[data-theme="light"] .guide-page { --guide-page-background: #f4f3ef; }
 :root[data-theme="light"] .home-page { color: #292a31; }
 :root[data-theme="light"] .guide-hero p { color: #5e6069; }
+:root[data-theme="light"] .roadmap-section { border-color: #d9d7d0; background: #eeede8; }
+:root[data-theme="light"] .roadmap-section h2 { color: #30313a; }
+:root[data-theme="light"] .roadmap-list li { color: #555761; }
+:root[data-theme="light"] .roadmap-note { color: #62636d; }
 :root[data-theme="light"] .guide-example,
 :root[data-theme="light"] .guide-card:not(.guide-example) > .guide-card-summary,
 :root[data-theme="light"] .guide-card[open]:not(.guide-example) > .guide-card-content { border-color: #d9d7d0; background: #eeede8; }
@@ -267,8 +274,10 @@ button:focus-visible, textarea:focus-visible, a:focus-visible { outline: 2px sol
   :root[data-theme="light"] .top-menu-items { border-color: #d5d3cb; background: #f4f3ef; box-shadow: 0 8px 24px #292a311a; }
   .top-menu-items.open { display: flex; }
   .top-menu-items .button { min-height: 44px; justify-content: flex-start; padding: 0 12px; font-size: 14px; }
-  .top-menu-items .menu-guide-link { position: static; top: auto; right: auto; display: none; min-height: 44px; border: 1px solid #333542; padding: 0 12px; background: transparent; box-shadow: none; font-size: 14px; }
-  .top-menu-items.open .menu-guide-link { display: inline-flex; }
+  .top-menu-items .menu-guide-link,
+  .top-menu-items .menu-roadmap-link { position: static; top: auto; right: auto; display: none; min-height: 44px; border: 1px solid #333542; padding: 0 12px; background: transparent; box-shadow: none; font-size: 14px; }
+  .top-menu-items.open .menu-guide-link,
+  .top-menu-items.open .menu-roadmap-link { display: inline-flex; }
   .button { min-height: 40px; padding: 0 11px; font-size: 12px; }
   .workspace { grid-template-columns: minmax(0, 1fr); }
   .explorer-panel { position: static; grid-row: auto; grid-column: 1; height: auto; min-height: 0; max-height: 290px; border-right: 0; border-bottom: 1px solid #292b37; }
@@ -357,6 +366,12 @@ button:focus-visible, textarea:focus-visible, a:focus-visible { outline: 2px sol
 .guide-eyebrow { color: #ff858b; font-size: 10px; font-weight: 720; letter-spacing: 1.2px; }
 .guide-hero h1 { margin: 12px 0 9px; font-size: clamp(29px, 5vw, 42px); font-weight: 660; letter-spacing: -1.2px; }
 .guide-hero p { max-width: 650px; margin: 0; color: #999aa8; font-size: 14px; line-height: 1.7; }
+.roadmap-section { margin-top: 16px; border: 1px solid #2c2e3a; border-radius: 10px; padding: 20px 22px; background: #181a23; }
+.roadmap-section-heading { display: flex; flex-wrap: wrap; align-items: center; gap: 10px; }
+.roadmap-section h2 { margin: 0; color: #eeedf4; font-size: 17px; font-weight: 650; }
+.roadmap-list { display: grid; gap: 9px; margin: 17px 0 0; padding-left: 20px; }
+.roadmap-list li { color: #a3a3b0; font-size: 13px; line-height: 1.65; }
+.roadmap-note { margin: 18px 0 0; color: #999aa8; font-size: 12px; line-height: 1.65; }
 .guide-card { margin-top: 16px; }
 .guide-example { overflow: hidden; border: 1px solid #2c2e3a; border-radius: 10px; background: #181a23; }
 .guide-card:not(.guide-example) > .guide-card-summary { display: flex; min-height: 62px; align-items: center; justify-content: space-between; gap: 16px; padding: 14px 22px; color: #eeedf4; cursor: pointer; list-style: none; }
@@ -427,6 +442,8 @@ button:focus-visible, textarea:focus-visible, a:focus-visible { outline: 2px sol
 .home-cta { min-height: 56px; padding: 0 28px; border-radius: 8px; font-size: 15px; }
 @media (max-width: 680px) {
   .guide-main { width: min(100% - 24px, 850px); padding: 32px 0 48px; }
+  .roadmap-page .top-actions a[href="guide.html"] { display: none; }
+  .roadmap-section { padding: 17px; }
   .guide-card-content { padding: 0 17px 17px; }
   .guide-card:not(.guide-example) > .guide-card-summary { padding: 13px 17px; }
   .guide-example { padding: 0; }
